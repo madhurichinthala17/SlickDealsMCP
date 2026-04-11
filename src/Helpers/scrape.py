@@ -1,12 +1,12 @@
 
 import requests
 import xml.etree.ElementTree as ET
-from Models import Item
+from src.Models import Item,SearchDealsOutput
 import re
 from typing import List, Optional
 
 
-def get_deals(item: str) -> List[Item]:
+def get_deals(item: str) -> SearchDealsOutput:
     """Searches and scrapes deal information for a given item from the SlickDeals website.
 
     Args:
@@ -23,14 +23,14 @@ def get_deals(item: str) -> List[Item]:
     for entry in root.findall(".//item"):
         title = entry.find("title").text
         link = entry.find("link").text
-        if title is None or link is None:
-            continue
-
         price = get_deal_price(title)
         deal = Item(title=title, link=link, price=price)
         deals.append(deal)
 
-    return deals
+    return SearchDealsOutput(
+        result=[deal.model_dump() for deal in deals],
+        total=len(deals)
+    )
 
 
 def get_deal_price(title: str) -> Optional[float]:
@@ -49,8 +49,8 @@ def get_deal_price(title: str) -> Optional[float]:
     if match:
         price = match.group()
         price = float(price.replace("$", ""))
-        print(f"Price extracted from title: {price}")
-
+        return price
+    return None
 
 if __name__ == "__main__":
     item = input("Enter the name of the item to search for: ")
