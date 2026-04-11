@@ -1,12 +1,13 @@
 
 import requests
 import xml.etree.ElementTree as ET
+from src.Helpers.validators import validate_search_item
 from src.Models import Item,SearchDealsOutput
 import re
 from typing import List, Optional
 
 
-def get_deals(item: str) -> SearchDealsOutput:
+def get_deals(item: str) -> SearchDealsOutput | str:
     """Searches and scrapes deal information for a given item from the SlickDeals website.
 
     Args:
@@ -15,6 +16,9 @@ def get_deals(item: str) -> SearchDealsOutput:
     Returns:
         SearchDealsOutput: The search result containing items and total count.
     """
+    is_valid, error_message = validate_search_item(item)    
+    if not is_valid:
+        raise ValueError(error_message)
     url = f"https://slickdeals.net/newsearch.php?q={item}&searchin=first&rss=1"
     response = requests.get(url)
     root = ET.fromstring(response.content)
