@@ -13,7 +13,7 @@ def get_deals(item: str) -> SearchDealsOutput:
         item (str): The name of the item to search for.
 
     Returns:
-        List[Item]: A list of Item objects containing the deal information for the item.
+        SearchDealsOutput: The search result containing items and total count.
     """
     url = f"https://slickdeals.net/newsearch.php?q={item}&searchin=first&rss=1"
     response = requests.get(url)

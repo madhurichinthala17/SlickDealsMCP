@@ -1,3 +1,4 @@
-from .DataModel import Item
+from .DataModel import Item, SearchDealsOutput
 
-__all__ = ["Item"]
+__all__ = ["Item", "SearchDealsOutput"]
+
