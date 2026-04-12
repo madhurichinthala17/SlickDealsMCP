@@ -1,9 +1,9 @@
-
+import re
 import requests
 import xml.etree.ElementTree as ET
 from src.Helpers.validators import validate_search_item
-from src.Models import Item,SearchDealsOutput
-import re
+from src.Models import Item,SearchDealsOutput,PriceDetails
+from bs4 import BeautifulSoup
 from typing import List, Optional
 
 
@@ -55,6 +55,20 @@ def get_deal_price(title: str) -> Optional[float]:
         price = float(price.replace("$", ""))
         return price
     return None
+
+def get_price_details(link:str) -> PriceDetails:
+    """Extracts the price details of a deal from the deal link.
+
+    Args:
+        link (str): The link to the deal.
+
+    Returns:
+        Tuple[float, float, str]: The original price, discounted price, and discount percentage.
+    """
+    response = requests.get(link)
+
+
+    return original_price, discounted_price, discount_percentage
 
 if __name__ == "__main__":
     item = input("Enter the name of the item to search for: ")

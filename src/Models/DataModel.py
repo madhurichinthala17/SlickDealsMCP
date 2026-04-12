@@ -9,3 +9,8 @@ class Item(BaseModel):
 class SearchDealsOutput(BaseModel):
     result: List[Item]
     total: int
+
+class PriceDetails(BaseModel):
+    current_price: float
+    original_price: float
+    discount_percentage: float
