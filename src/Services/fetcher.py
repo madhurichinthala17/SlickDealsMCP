@@ -1,4 +1,4 @@
-import config
+from src import config
 from bs4 import BeautifulSoup
 import requests
 

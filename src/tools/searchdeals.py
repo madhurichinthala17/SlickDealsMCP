@@ -1,5 +1,5 @@
 from src.Models import Item, SearchDealsOutput
-from src.Helpers.utils import get_deals
+from src.Core.deals import get_deals
 from src.Tools.mcp import mcp
 
 

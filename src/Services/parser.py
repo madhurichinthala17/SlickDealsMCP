@@ -1,4 +1,3 @@
-from Services.fetcher import get_xml_response_from_link
 import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 from typing import Optional

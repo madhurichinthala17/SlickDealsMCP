@@ -35,3 +35,18 @@ def get_discount_percentage(discount_text: str) -> Optional[int]:
     if discount_percentage_match:
         return int(discount_percentage_match.group(1))
     return None
+
+
+def affordability_check(price: Optional[float], max_price: float) -> bool:
+    """Checks if the given price is affordable based on the maximum price.
+
+    Args:
+        price (Optional[float]): The price to check.
+        max_price (float): The maximum price threshold.
+
+    Returns:
+        bool: True if the price is affordable, False otherwise.
+    """
+    if price is not None and price is not "N/A" and price <= max_price:
+        return True
+    return False
