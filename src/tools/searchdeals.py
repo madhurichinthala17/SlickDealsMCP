@@ -1,9 +1,6 @@
-from mcp.server.fastmcp import FastMCP
 from src.Models import Item, SearchDealsOutput
 from src.Helpers.scrape import get_deals
-
-
-mcp = FastMCP("SlickDealsMCP")
+from src.tools.mcp import mcp
 
 
 @mcp.tool()
