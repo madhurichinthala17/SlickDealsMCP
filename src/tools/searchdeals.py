@@ -1,6 +1,6 @@
 from src.Models import Item, SearchDealsOutput
-from src.Helpers.scrape import get_deals
-from src.tools.mcp import mcp
+from src.Helpers.utils import get_deals
+from src.Tools.mcp import mcp
 
 
 @mcp.tool()
