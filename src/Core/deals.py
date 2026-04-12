@@ -2,7 +2,7 @@ from src.Services.fetcher import get_xml_response_from_link
 from src.Models.DataModel import SearchDealsOutput, Item
 from src.Helpers.validators import validate_search_item
 from src.Core.searchdeals import search_deals
-import config
+from src import config
 
 
 def get_deals(item: str) -> SearchDealsOutput:
