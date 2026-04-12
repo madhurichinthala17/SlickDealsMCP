@@ -20,18 +20,15 @@ def get_response_from_link(link:str) -> BeautifulSoup:
         raise Exception(f"Failed to fetch the page. Status code: {response.status_code}")
     
 
-def get_xml_response_from_link(item: str) -> bytes:
+def get_xml_response_from_link(url : str) -> bytes:
     """Fetches the XML content of a given link
 
     Args:
-        item (str): The item to search for.
+        url (str): The URL to fetch.
 
     Returns:
         bytes: The raw XML content of the page.
     """
-
-
-    url = config.SLICKDEALS_RSS_URL.format(item=item)
     response = requests.get(url)
     if response.status_code == 200:
         return response.content

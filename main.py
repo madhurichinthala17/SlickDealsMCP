@@ -1,4 +1,4 @@
-from src.Tools.searchdeals import mcp
+from src.Tools.mcp import mcp
 
 if __name__ == "__main__":
     mcp.run()
