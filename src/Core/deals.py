@@ -35,17 +35,17 @@ def get_hot_deals() -> SearchDealsOutput:
     return search_deals(xml_content)
 
 
-def get_recent_deals(SearchDealsOutput) -> RecentItem:
+def get_recent_deals(search_output: SearchDealsOutput) -> list[RecentItem]:
     """Sorts the deals based on their posted date and returns the list of recent items.
 
     Args:
-        SearchDealsOutput: The search result containing items and total count.
+        search_output: The search result containing items and total count.
 
     Returns:
-        RecentItem: The sorted list of recent items based on posted date.
+        list[RecentItem]: The sorted list of recent items based on posted date.
     """
-    list_of_deals = List[RecentItem]
-    for deal in SearchDealsOutput.result:
+    list_of_deals: list[RecentItem] = []
+    for deal in search_output.result:
         if deal.posted_details:
             posted_date = extract_posted_date(deal.posted_details)
             recent_item = RecentItem(
