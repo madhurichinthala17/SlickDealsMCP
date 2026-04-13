@@ -83,9 +83,13 @@ Add the following MCP server entry to your client or runtime configuration:
   "mcpServers": {
     "slickdeals": {
       "command": "uvx",
-      "args": ["slickdeals-mcp"]
+      "args":[
+        "--from",
+        "git+https://github.com/madhurichinthala17/SlickDealsMCP.git",
+        "slickdeals-mcp"
+      ]
     }
-  }
+}
 }
 ```
 
