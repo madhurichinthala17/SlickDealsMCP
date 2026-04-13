@@ -74,6 +74,21 @@ Once the server is running, use an MCP client or integration to call the registe
 - `src/Services/` — network fetcher and parser utilities
 - `src/Helpers/` — validators and helper utilities
 
+## MCP Server Configuration
+
+Add the following MCP server entry to your client or runtime configuration:
+
+```json
+{
+  "mcpServers": {
+    "slickdeals": {
+      "command": "uvx",
+      "args": ["slickdeals-mcp"]
+    }
+  }
+}
+```
+
 ## Notes
 
 - The project relies on SlickDeals RSS feeds and page scraping, so output may vary if the target site changes.

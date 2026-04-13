@@ -1,0 +1,22 @@
+[project]
+name = "slickdealsmcp"
+version = "0.1.0"
+description = "SlickDeals MCP Server"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    
+    "mcp[cli]",
+    "fastmcp",
+    "requests",
+    "beautifulsoup4",
+    "pydantic",
+    "lxml",
+]
+
+[project.scripts]
+slickdeals-mcp = "main:run"
+
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
