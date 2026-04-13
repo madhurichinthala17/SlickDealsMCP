@@ -1,3 +1,4 @@
+from datetime import datetime
 from src.Services.fetcher import get_xml_response_from_link
 from src.Models.DataModel import RecentItem, SearchDealsOutput, Item
 from src.Helpers.validators import validate_search_item
@@ -54,5 +55,9 @@ def get_recent_deals(search_output: SearchDealsOutput) -> list[RecentItem]:
                 posted_date=posted_date
             )
             list_of_deals.append(recent_item)
-    sorted_deals = sorted(list_of_deals, key=lambda x: x.posted_date, reverse=True)
+    sorted_deals = sorted(
+        list_of_deals,
+        key=lambda x: x.posted_date or datetime.min,
+        reverse=True,
+    )
     return sorted_deals
