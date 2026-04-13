@@ -4,7 +4,7 @@ from src.Models.DataModel import  RecentItem
 from typing import List
 
 @mcp.tool()
-def get_latest_deals(item : str) -> List[RecentItem]
+def get_latest_deals(item : str) -> List[RecentItem]:
     """Fetches the latest deals for a given item.
 
     Args:
