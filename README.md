@@ -28,7 +28,7 @@ A Python-based MCP tool suite for scraping SlickDeals and exposing deal search f
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-org/SlickDealsMCP.git
+   git clone https://github.com/madhurichinthala17/SlickDealsMCP.git
    cd SlickDealsMCP
    ```
 
