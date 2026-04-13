@@ -1,5 +1,7 @@
 import re
+from datetime import datetime, timedelta
 from typing import Optional
+from src.Models import RecentItem, SearchDealsOutput
 
 
 def get_deal_price(title: str) -> Optional[float]:
@@ -47,6 +49,49 @@ def affordability_check(price: Optional[float], max_price: float) -> bool:
     Returns:
         bool: True if the price is affordable, False otherwise.
     """
-    if price is not None and price is not "N/A" and price <= max_price:
+    if price is not None and price != "N/A" and price <= max_price:
         return True
     return False
+
+
+def extract_posted_date(raw_text: str) -> Optional[datetime]:
+    """
+    Extracts the posted date from the given raw text.
+    Args:
+        raw_text (str): The raw text containing the posted date information.
+    
+        Returns:
+        datetime: The extracted posted date as a datetime object   
+    """
+
+    if not raw_text:
+        return None
+
+    now = datetime.now()
+
+    # Extract part after "posted"
+    match = re.search(r"posted\s*(.+)", raw_text, flags=re.IGNORECASE)
+    date_text = match.group(1).strip() if match else raw_text.strip()
+
+    # Handle relative dates
+    if date_text.lower() == "today" or date_text.lower() == "Today":
+        return now
+
+    if date_text.lower() == "yesterday" or date_text.lower() == "Yesterday":
+        return now - timedelta(days=1)
+
+    # Handle "X hours/mins ago" (optional but useful)
+    age_match = re.search(r"(\d+)\s*hour", date_text, flags=re.IGNORECASE)
+    if age_match:
+        return now - timedelta(hours=int(age_match.group(1)))
+
+    age_match = re.search(r"(\d+)\s*min", date_text, flags=re.IGNORECASE)
+    if age_match:
+        return now - timedelta(minutes=int(age_match.group(1)))
+
+    # Handle standard format
+    try:
+        return datetime.strptime(date_text, "%b %d, %Y %I:%M %p")
+    except ValueError:
+        return None
+

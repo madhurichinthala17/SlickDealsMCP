@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import BaseModel, HttpUrl
 from typing import List, Optional
 
@@ -17,3 +18,8 @@ class PriceDetails(BaseModel):
     current_price: Optional[float] | str = None
     original_price: Optional[float] | str = None
     discount_percentage: Optional[int]  | str = None
+
+class RecentItem(BaseModel):
+    title: str
+    link: HttpUrl
+    posted_date : Optional[datetime] = None
