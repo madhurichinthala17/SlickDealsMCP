@@ -7,7 +7,7 @@ class Item(BaseModel):
     link: HttpUrl
     current_price: Optional[float] | str= None
     original_price: Optional[float] | str = None
-    discount_percentage: Optional[int]  | str = None
+    discount_percentage: Optional[float]  | str = None
     posted_details: Optional[str]  | str = None
 
 class SearchDealsOutput(BaseModel):
@@ -17,7 +17,7 @@ class SearchDealsOutput(BaseModel):
 class PriceDetails(BaseModel):
     current_price: Optional[float] | str = None
     original_price: Optional[float] | str = None
-    discount_percentage: Optional[int]  | str = None
+    discount_percentage: Optional[float] | str = None
 
 class RecentItem(BaseModel):
     title: str

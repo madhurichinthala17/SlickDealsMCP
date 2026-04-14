@@ -24,18 +24,18 @@ def get_deal_price(title: str) -> Optional[float]:
     return None
 
 
-def get_discount_percentage(discount_text: str) -> Optional[int]:
+def get_discount_percentage(discount_text: str) -> Optional[float]:
     """Extracts the discount percentage from the given text.
 
     Args:
         discount_text (str): The text containing the discount percentage.
 
     Returns:
-        Optional[int]: The extracted discount percentage, or None if not found.
+        Optional[float]: The extracted discount percentage, or None if not found.
     """
-    discount_percentage_match = re.search(r"(\d+)%", discount_text)
+    discount_percentage_match = re.search(r"(\d+(?:\.\d+)?)%", discount_text)
     if discount_percentage_match:
-        return int(discount_percentage_match.group(1))
+        return float(discount_percentage_match.group(1))
     return None
 
 
