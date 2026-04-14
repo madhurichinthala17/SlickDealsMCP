@@ -42,7 +42,7 @@ A Python-based MCP tool suite for scraping SlickDeals and exposing deal search f
 3. Install dependencies:
 
    ```bash
-   pip install fastmcp pydantic requests beautifulsoup4
+   pip install fastmcp pydantic requests beautifulsoup4 pytest
    ```
 
 ## Running the project

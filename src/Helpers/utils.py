@@ -15,7 +15,7 @@ def get_deal_price(title: str) -> Optional[float]:
     """
 
     # Regular expression to find price in the title
-    price_pattern = r"\$\d+(\.\d{2})?"
+    price_pattern = r"\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?"
     match = re.search(price_pattern, title)
     if match:
         price = match.group()
