@@ -76,12 +76,26 @@ def extract_posted_date(raw_text: str) -> Optional[datetime]:
     match = re.search(r"posted\s*(.+)", raw_text, flags=re.IGNORECASE)
     date_text = match.group(1).strip() if match else raw_text.strip()
 
-    # Handle relative dates
-    if date_text.lower() == "today" or date_text.lower() == "Today":
+    # Normalize relative date text
+    normalized_date_text = date_text.strip().lower()
+
+    if normalized_date_text == "today":
         return now
 
-    if date_text.lower() == "yesterday" or date_text.lower() == "Yesterday":
+    if normalized_date_text == "yesterday":
         return now - timedelta(days=1)
+
+    # Handle "Today 08:32 PM" or "Yesterday 07:20 AM"
+    relative_with_time_match = re.match(r"^(today|yesterday)\s+(\d{1,2}:\d{2}\s*[APap][Mm])$", date_text.strip(), flags=re.IGNORECASE)
+    if relative_with_time_match:
+        relative_day = relative_with_time_match.group(1).lower()
+        time_text = relative_with_time_match.group(2).strip()
+        date_base = now if relative_day == "today" else now - timedelta(days=1)
+        try:
+            time_value = datetime.strptime(time_text, "%I:%M %p").time()
+            return datetime.combine(date_base.date(), time_value)
+        except ValueError:
+            return None
 
     # Handle "X hours/mins ago" (optional but useful)
     age_match = re.search(r"(\d+)\s*hour", date_text, flags=re.IGNORECASE)
