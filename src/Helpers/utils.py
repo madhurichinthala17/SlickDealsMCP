@@ -49,9 +49,12 @@ def affordability_check(price: Optional[float], max_price: float) -> bool:
     Returns:
         bool: True if the price is affordable, False otherwise.
     """
-    if price is not None and price != "N/A" and price <= max_price:
-        return True
-    return False
+    try:
+        if price is not None and price != "N/A" and price <= max_price:
+            return True
+        return False
+    except (TypeError, ValueError):
+        return False
 
 
 def extract_posted_date(raw_text: str) -> Optional[datetime]:
